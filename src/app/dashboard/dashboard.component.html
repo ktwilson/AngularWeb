@@ -1,0 +1,69 @@
+﻿
+<div class="container" >
+    <div class="row">      
+      <div class="span9">
+        <div class="page-header">
+          <h4>Dashboard</h4>
+        </div>
+      </div>
+      <div class="row" style="background-color:whitesmoke">     
+        <div class="col-sm-12">&nbsp;</div>
+        <div class="col-sm-3">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h4>Content</h4></div>
+            <div class="panel-body">
+              <div style="text-align:left">            
+                <a href="#weather">Weather</a><br />
+                <a href="#logs">Logs</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>      
+        <div class="col-sm-6" >
+          <div class="panel panel-default">
+            <div class="panel-heading"><h4>Services</h4></div>
+            <div class="panel-body" style="">
+              <div class="row">
+                <div class="col-sm-4"  *ngFor="let svc of services">
+                  <div class="panel" [ngClass]="svc.class">
+                    <div class="panel-heading"  style="padding:5px 15px 5px"><h4>{{svc.name}}</h4></div>
+                    <div class="panel-body" >
+                      <span>
+                        <span>{{svc.display}}</span>       
+                        <img *ngIf="svc.icon" [src]="svc.icon" width="40" height="25" />
+                      </span>
+                    </div>
+                  </div>
+                 
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="authRequired">        
+        <div class="col-sm-3 col-sm-offset-3">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h4>Login</h4></div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  User:<input type="text" id="user"  [(ngModel)]="credentials.user"/> 
+                  Password: <input type="password" id="pswd"  [(ngModel)]="credentials.pswd" />
+                
+                </div>               
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="btn btn-info" (click)="login()">Login</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

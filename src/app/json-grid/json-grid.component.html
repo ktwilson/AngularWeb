@@ -1,0 +1,39 @@
+﻿<br />
+<div>
+  <div class="row">    
+    <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12" style="text-align:left">
+              <span>Url:</span>
+              <input type="text" [(ngModel)]="wsUrl" style="border:1px solid lightskyblue;width:500px" />&nbsp;&nbsp;
+              <button (click)="loadData()">Load</button>
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table style="width:100%">
+                
+                <tr *ngFor="let row of dataset">
+                  <td>
+                    <table>
+                    <tr *ngFor="let hdr of headers">
+                      <td><span class="bold">{{hdr}}:</span></td>
+                      <td>{{row[hdr]}}</td>
+                    </tr>
+                    </table>
+                  </td>
+                
+                </tr>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,255 @@
+﻿<div class="container">
+  <br />
+  <div class="page-header">
+    <h4>Sourek Trail Weather Station (Akron, OH)</h4>
+  </div>
+  <br />
+  <div class="row">
+
+    <div class="col-md-1">
+      <div id="curIcon"><img class="wx-data" src="{{vm.forecast.icon}}"></div>
+    </div>
+
+    <div class="col-md-2">
+      <div id="curTemp" style="color: #b6c609;">
+        <span class="wx-data">
+          <span class="wx-value">{{vm.temperature}}</span>
+          <span class="wx-unit">°F</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div id="curWind">
+        <div id="windCompassContainer">
+          <div class="wx-data">
+            <div id="windCompass" class="dial" [ngStyle]="vm.windDirCSS">
+              <div class="arrow-direction">
+              </div>
+
+            </div>
+            <span class="windCompassSpeed" style="font-size:9pt">
+              <span class="wx-value" [innerHtml]="vm.windDirection"></span>
+              <span [innerHtml]="vm.windAvg"></span>
+            </span>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div>
+        <span>Wind Gust</span>
+        <span class="wx-value" [innerHtml]="vm.windSpeed"></span>
+        <br />
+        <span class="wx-data">High Today</span>
+        <span class="wx-value" [innerHtml]="vm.today.HiWind" title="{{vm.today.HiWindTime}}"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>&nbsp;</div>
+  </div>
+
+  <div class="row">
+    <div>&nbsp;</div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <span class="today">Today</span>
+      <div>
+        High
+        <strong class="high" [innerHtml]="vm.today.HiTemp" title="{{vm.today.HiTempTime}}"></strong>
+        <span class="split">|</span> Low
+        <strong class="low" [innerHtml]="vm.today.LowTemp" title="{{vm.today.LowTempTime}}"></strong>
+        °F
+      </div>
+    </div>
+
+    <!--<div ng-if="vm.yesterday.HiTemp != null">
+      <div class="today">Yesterday</div>
+      <div>
+        High <strong class="high" [innerHtml]="vm.yesterday.HiTemp"></strong> <span class="split">|</span> Low <strong class="low" [innerHtml]="vm.yesterday.LowTemp"></strong>°F
+      </div>
+    </div>-->
+  </div>
+
+  <!--<div class="row" ng-show="vm.yesterday.DailyRain">
+    <div class="col-md-3"></div>
+    <div>
+      Precip. <strong [innerHtml]="vm.yesterday.DailyRain"></strong>
+    </div>
+  </div>-->
+
+  <div>&nbsp;</div>
+  <div class="row">
+    <div class="col-md-12">
+      <b>Current Conditions</b>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-">
+      <table cellpadding="0" cellspacing="0" class="table-striped almanac">
+        <tbody>
+
+          <tr>
+            <td style="width:100px">Barometer</td>
+            <td class="wx-data">
+              <span class="wx-value" [innerText]="vm.barometer"></span>
+              <span class="wx-unit">in</span>
+              <span [innerHtml]="vm.barometerTrend"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>Dew Point</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.dewpoint"></span>
+                <span class="wx-unit">°F</span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Humidity</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.humidity"></span><span class="wx-unit">%</span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Heat Index</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="heatIndex"></span>
+                <span class="wx-unit">°F</span>
+              </span>
+            </td>
+          </tr>
+          <tr [hidden]="vm.rainRate == 0 && vm.dayRain == 0">
+            <td>Rain Rate</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.rainRate"></span>
+                <span class="wx-unit">in/hr</span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Rain Today</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.dayRain"></span>
+                <span class="wx-unit">in</span>
+              </span>
+            </td>
+          </tr>
+          <tr [hidden]="vm.today.hourRain == 0">
+            <td>Rain 1 Hour</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.today.hourRain"></span>
+                <span class="wx-unit">in</span>
+              </span>
+            </td>
+          </tr>
+          <tr [hidden]="vm.stormRain == 0">
+            <td>Storm Rain</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.stormRain"></span>
+                <span class="wx-unit" ng-show="vm.stormRain > 0">in since&nbsp;</span>
+                <span class="wx-value" [innerHtml]="vm.stormDate"></span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Month Rain</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.monthRain"></span>
+                <span class="wx-unit">in</span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Year Rain</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.yearRain"></span>
+                <span class="wx-unit">in</span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Sunrise</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.sunrise"></span>
+
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>Sunset</td>
+            <td>
+              <span class="wx-data">
+                <span class="wx-value" [innerHtml]="vm.sunset"></span>
+              </span>
+            </td>
+          </tr>
+          <tr style="display:none">
+            <td><dfn>Snow Depth</dfn></td>
+            <td>
+              <span class="wx-na">Not available.</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Updated </td>
+            <td><span [innerHtml]="vm.lastUpdate"></span> seconds ago</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <br />
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <b>Forecast</b><br />
+
+      <span>Today:</span> <span [innerHtml]="vm.forecast.today"></span> <br />
+      <span>Tonight:</span> <span [innerHtml]="vm.forecast.tonight"></span> <br />
+      <span>Tomorrow:</span> <span>{{vm.forecast.tomorrow}}</span> <br />
+
+      <a href="http://www.wunderground.com/cgi-bin/findweather/hdfForecast?query=41.149%2C-81.576&sp=KOHAKRON2">
+        <img src="http://icons.wxug.com/logos/PNG/wundergroundLogo_4c_horz.png" width="110" height="25" title="Forecast by Weather Underground" />
+      </a>
+
+
+    </div>
+  </div>
+
+  <br />
+  <div class="row" ng-show="vm.NWSAlert != 0">
+    <div class="col-md-8">
+      <span class="alert" [innerHtml]="vm.alerts"></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <app-weather-chart></app-weather-chart>
+    </div>
+  </div>
+</div>       
