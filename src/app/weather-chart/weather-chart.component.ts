@@ -4,6 +4,7 @@ import { WeatherService } from '../services/weather';
 import * as Graphs from '../classes/GraphSet';
 import * as moment from 'moment';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-weather-chart',
@@ -13,7 +14,10 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 })
 export class WeatherChartComponent implements OnInit {
 
-    constructor(private webService: WeatherService) { }
+    constructor(private webService: WeatherService, private titleService: Title) {
+        this.titleService.setTitle("Sourek Trail Weather");
+    }
+
     monthName: string;
     public dataSets: Array<Graphs.GraphSet>;
     public lineChartData: Array<Graphs.GraphItem>;
@@ -105,7 +109,7 @@ export class WeatherChartComponent implements OnInit {
         this.chartSet = this.dataSets[this.chartIndex];
         this.lineChartOptions = this['lineChartOptions' + this.chartIndex.toString()];
 
-        this.loadGraph();
+        //this.loadGraph();
     }
 
     chartClicked(e) {

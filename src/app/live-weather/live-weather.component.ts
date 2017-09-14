@@ -45,17 +45,17 @@ export class LiveWeatherComponent implements OnInit {
         try {
             var hostname;
 
-            if (document.location.hostname.indexOf('k2015') > -1 || document.location.hostname.indexOf('smart-app.live') > -1)
-                hostname = 'http://smart-app.live:9000';
-            else
-                hostname = 'http://hpmini1:9000';
+            //if (document.location.hostname.indexOf('k2015') > -1 || document.location.hostname.indexOf('smart-app.live') > -1)
+              hostname = 'http://smart-app.live:9000';
+            //else
+            //    hostname = 'http://hpmini1:9000';
 
             console.log('hostname ' + hostname);
 
             this.wsocket = io(hostname, { query: {client:"wsclient"}});
 
             this.wsocket.on('connect', () => {
-                
+                console.log('ws connected');
             });
 
             this.wsocket.on('current', data => {

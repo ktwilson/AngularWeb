@@ -2,6 +2,7 @@
 import io from 'socket.io-client';
 import { UtilityService } from '../services/utility';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,18 +11,19 @@ import { DomSanitizer } from '@angular/platform-browser';
   providers: [UtilityService]
 })
 export class DashboardComponent implements OnInit {
-    vantagejs = { name: "VantageJS", class: "panel-default",icon:'', path:'vpws' }
+    vantagejs = { name: "VantageJS", class: "panel-default",icon:'', path:'vpws', url:'http://smart-app.live/' }
     socketSrv = { name: "Sockets", class: "panel-default", icon: '', path: 'http://smart-app.live:9000' }
     garDoor = { name: "Garage", class: "panel-default", icon:'', path:'gdoor/status'}
     shpDoor = { name: "Shop", class: "panel-default" ,icon:'', path:'shop/status'}
     fi9803p = { name: "FI9803P", class: "panel-default", icon: '', path:'gdoor/image' }
-    acPower = { name: "AC Power", class: "panel-default", icon: '', path:'power'}
+    acPower = { name: "AC Power", class: "panel-default", iconclass: 'fa fa-bolt', path:'power'}
 
     services: Array<any>;
     authRequired: boolean;
     credentials: any;
 
-    constructor(private webService: UtilityService, private sanitizer: DomSanitizer) {
+    constructor(private webService: UtilityService, private sanitizer: DomSanitizer, private titleService: Title) {
+        this.titleService.setTitle("Services");
         var auth: any = this.getCookie('auth');     
         this.credentials = { user: null, pswd: null };
 
@@ -35,7 +37,8 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getStatuses();
+        this.getStatuses();        
+
         setInterval(this.getStatuses(), 60000);
   }
 
@@ -48,55 +51,73 @@ export class DashboardComponent implements OnInit {
         this.getService(this.acPower);
   }  
 
-  getWebSocket(svc) {
-      try {
-          var hostname = svc.path;
-          var wsocket = io(hostname, { query: { client: "wsclient" } });
+    getWebSocket(svc) {
+        svc.url = svc.path;
 
-          wsocket.on('connect', () => {
-              svc.class = 'panel-primary';
-              svc.display = 'connected';
-          });
+        try {
+            var hostname = svc.path;
+            var wsocket = io(hostname, { query: { client: "wsclient" } });
 
-          wsocket.on('error', () => {
-              svc.class = 'panel-danger';
-          });
+            wsocket.on('connect', () => {
+                svc.class = 'panel-primary';
+                svc.display = 'connected';
+            });
 
-          wsocket.on('current', current => {
-              if (typeof current == 'string')
-                  current = JSON.parse(current);
-              svc.display = new Date(current.dateLoaded).toLocaleTimeString();
-          });
+            wsocket.on('error', () => {
+                svc.class = 'panel-danger';
+            });
+
+            wsocket.on('current', current => {
+                if (typeof current == 'string')
+                    current = JSON.parse(current);
+                svc.display = new Date(current.dateLoaded).toLocaleTimeString();
+            });
 
 
-      }
-      catch (e) {
-          console.log('socket error:' + e);
-      }
+        }
+        catch (e) {
+            console.log('socket error:' + e);
+        }
   }
 
   getAuthService(svc) {     
       
       var url = 'https://smart-app.live/' + svc.path;
-      this.webService.getAuthData(url, this.credentials).subscribe(data => {          
-          if (typeof data == 'string')
-              svc.display = data;
-          else {
-              var reader = new FileReader();
-              reader.addEventListener('loadend', (result) => {
-                  svc.icon = this.sanitizer.bypassSecurityTrustUrl(reader.result);
-              }) 
-              reader.readAsDataURL(data);
-             
-          }
+      if (!svc.url)
+          svc.url = url;
+
+      this.webService.getAuthData(url, this.credentials).subscribe(data => {       
+          switch (typeof data) {
+              case "string":
+                  svc.display = data;
+                  break;
+              case "object":
+                  if (data.size) {
+                      var reader = new FileReader();
+                      reader.addEventListener('loadend', (result) => {
+                          svc.icon = this.sanitizer.bypassSecurityTrustUrl(reader.result);
+                      });
+                      reader.readAsDataURL(data);
+                  }
+                  else {
+                      svc.display = data.status ? data.status : data.result;
+                  }
+                  break;
+          }          
           
           svc.class = 'panel-primary';
-      },err=>svc.class = 'panel-danger');
+      }, err => {
+          svc.class = 'panel-danger';
+          this.authRequired = true;
+      });
   }
  
 
   getService(svc) {       
       var url = 'http://smart-app.live/' + svc.path + '/';
+      if (!svc.url)
+          svc.url = url; 
+
       this.webService.getData(url).subscribe(data => {
           svc.class = 'panel-primary';
           if (data.acPower != null)
@@ -125,6 +146,8 @@ export class DashboardComponent implements OnInit {
 
   login() {
       if (this.credentials.user && this.credentials.user.length && this.credentials.pswd && this.credentials.pswd.length) {
+          this.credentials.user = this.credentials.user.toLowerCase();
+          this.authRequired = false;
           this.setCookie('auth',
               JSON.stringify(this.credentials)
               , 360, '/');

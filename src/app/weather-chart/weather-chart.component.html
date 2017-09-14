@@ -1,34 +1,42 @@
-﻿<div class="row">
-  <div class="col-md-3">
-    <span>Date:</span>
-    <ng2-datepicker [options]="dtPickerOpt" [(ngModel)]="dtPicker" (outputEvents)="handleDateChange($event)"></ng2-datepicker>
-  </div>
-  <div class="col-md-3">
-    <div class="fa fa-arrow-circle-left" title="Previous Day" (click)="previousDay()"></div>
-    &nbsp;Prev/Next&nbsp;
-    <div class="fa fa-arrow-circle-right" title="Next Day" (click)="nextDay()"></div>
-  </div>
-  <div class="col-md-6">
-    <span style="text-decoration:underline;cursor:pointer" (click)="switchView()">{{viewType}}</span>
-  </div>
-
-</div>
-<br />
-<div class="row">
-  <div class="col-md-8">
-    <div style="display: block;cursor:pointer" *ngIf="lineChartData">
-      <canvas baseChart width="400" height="400"
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="lineChartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
+﻿
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 align-center">
+      <h3>Sourek Trail Weather Charts</h3>
     </div>
   </div>
+  <br />
+  <div class="row">
+    <div class="col-md-3">
+      <span>Date:</span>
+      <ng2-datepicker [options]="dtPickerOpt" [(ngModel)]="dtPicker" (outputEvents)="handleDateChange($event)"></ng2-datepicker>
+    </div>
+    <div class="col-md-3">
+      <div class="fa fa-arrow-circle-left" title="Previous Day" (click)="previousDay()"></div>
+      &nbsp;Prev/Next&nbsp;
+      <div class="fa fa-arrow-circle-right" title="Next Day" (click)="nextDay()"></div>
+    </div>
+    <div class="col-md-6">
+      <span style="text-decoration:underline;cursor:pointer" (click)="switchView()">{{viewType}}</span>
+    </div>
 
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-8">
+      <div style="display: block;cursor:pointer" *ngIf="lineChartData">
+        <canvas baseChart width="400" height="400"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+
+  </div>
 </div>
-
 

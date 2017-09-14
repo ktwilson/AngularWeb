@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ChartsModule } from 'ng2-charts';
 import { WeatherChartComponent } from './weather-chart/weather-chart.component';
-import { LiveWeatherComponent } from './live-weather/live-weather.component'; 
+import { LiveWeatherComponent } from './live-weather/live-weather.component';  
 import { HttpModule } from '@angular/http';
 import { DatePickerModule } from 'ng2-datepicker';
 import { JsonGridComponent } from './json-grid/json-grid.component';
@@ -26,8 +26,12 @@ const ROUTES = [
         component: JsonGridComponent
     },
     {
-        path: 'dashboard',
+        path: 'services',
         component: DashboardComponent
+    },
+    {
+        path: 'weatherchart',
+        component: WeatherChartComponent
     }
 ]; 
 

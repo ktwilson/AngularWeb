@@ -241,15 +241,22 @@
   </div>
 
   <br />
-  <div class="row" ng-show="vm.NWSAlert != 0">
+  <div class="row" [hidden]="!vm.alerts || vm.alerts.length == 0">
     <div class="col-md-8">
       <span class="alert" [innerHtml]="vm.alerts"></span>
     </div>
   </div>
 
-  <div class="row">
+  <!--<div class="row">
     <div class="col-md-12">
       <app-weather-chart></app-weather-chart>
+    </div>
+  </div>-->
+  <div class="row">
+    <div class="col-md-12">
+      
+        <a class="btn btn-primary" href="#/weatherchart">Charts</a>
+      
     </div>
   </div>
 </div>       
