@@ -11,8 +11,8 @@ import { Title } from '@angular/platform-browser';
   providers: [UtilityService]
 })
 export class DashboardComponent implements OnInit {
-    vantagejs = { name: "VantageJS", class: "panel-default",icon:'', path:'vpws', url:'http://smart-app.live/' }
-    socketSrv = { name: "Sockets", class: "panel-default", icon: '', path: 'http://smart-app.live:9000' }
+    vantagejs = { name: "VantageJS", class: "panel-default",icon:'', path:'vpws', url:'/#/weather' }
+    socketSrv = { name: "Sockets", class: "panel-default", icon: '', path: '/vpws/socket.io',url: 'http://smart-app.live/' }
     garDoor = { name: "Garage", class: "panel-default", icon:'', path:'gdoor/status'}
     shpDoor = { name: "Shop", class: "panel-default" ,icon:'', path:'shop/status'}
     fi9803p = { name: "FI9803P", class: "panel-default", icon: '', path:'gdoor/image' }
@@ -51,12 +51,11 @@ export class DashboardComponent implements OnInit {
         this.getService(this.acPower);
   }  
 
-    getWebSocket(svc) {
-        svc.url = svc.path;
+    getWebSocket(svc) {        
 
         try {
-            var hostname = svc.path;
-            var wsocket = io(hostname, { query: { client: "wsclient" } });
+            var hostname = svc.url;
+            var wsocket = io(hostname, { query: { client: "wsclient" }, path: svc.path });
 
             wsocket.on('connect', () => {
                 svc.class = 'panel-primary';

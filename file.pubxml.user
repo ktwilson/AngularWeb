@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Projects\HomeApp\HomeApp\www\app</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="dist/favicon.ico">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/fontawesome-webfont.674f50d287a8c48dc19b.eot">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/fontawesome-webfont.912ec66d7572ff821749.svg">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/fontawesome-webfont.af7ae505a9eed503f8b8.woff2">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/fontawesome-webfont.b06871f281fee6b241d6.ttf">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/fontawesome-webfont.fee66e712a8a08eef580.woff">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/glyphicons-halflings-regular.448c34a56d699c29117a.woff2">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/glyphicons-halflings-regular.89889688147bd7575d63.svg">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/glyphicons-halflings-regular.e18bbf611f2a2e43afc0.ttf">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/glyphicons-halflings-regular.f4769f9bdb7466be6508.eot">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/glyphicons-halflings-regular.fa2772327f55d8198301.woff">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/index.html">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/inline.bundle.js">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/inline.bundle.js.map">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/main.bundle.js">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/main.bundle.js.map">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/polyfills.bundle.js">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/polyfills.bundle.js.map">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/styles.bundle.js">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/styles.bundle.js.map">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/vendor.bundle.js">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+    <File Include="dist/vendor.bundle.js.map">
+      <publishTime>09/22/2017 09:41:06</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

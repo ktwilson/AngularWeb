@@ -1,13 +1,15 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Current from '../classes/Current';
 import io from 'socket.io-client';
 import { WeatherChartComponent } from '../weather-chart/weather-chart.component';
 import { Title } from '@angular/platform-browser';
+import { WeatherService } from '../services/weather';
 
 @Component({
   selector: 'app-live-weather',
   templateUrl: './live-weather.component.html',
-  styleUrls: ['./live-weather.component.css']
+  styleUrls: ['./live-weather.component.css'],
+  providers: [WeatherService]
 })
 export class LiveWeatherComponent implements OnInit {
 
@@ -21,8 +23,8 @@ export class LiveWeatherComponent implements OnInit {
     title: string;
 
 
-    constructor(private titleService: Title) {
-        
+    constructor(private webService: WeatherService, private titleService: Title) {
+       
     }
 
     ngOnInit() {
@@ -30,36 +32,33 @@ export class LiveWeatherComponent implements OnInit {
         this.vm = {
             forecast: {},
             today: {},
-            yesterday: {}
+            yesterday: {}            
         };
 
-        this.connectWS();
+        this.checkService();
         setInterval(() => { this.updatedSeconds() }, 1000);
 
     }
 
-    connectWS() {
-
-        var vm = this.vm;
+    connectWS(useVpws) {        
 
         try {
-            var hostname;
-
-            //if (document.location.hostname.indexOf('k2015') > -1 || document.location.hostname.indexOf('smart-app.live') > -1)
-              hostname = 'http://smart-app.live:9000';
-            //else
-            //    hostname = 'http://hpmini1:9000';
+          var hostname = useVpws ? 'http://smart-app.live' : 'http://smart-app.live:9000';            
 
             console.log('hostname ' + hostname);
+            var options: any = { query: { client: "wsclient" } };
 
-            this.wsocket = io(hostname, { query: {client:"wsclient"}});
+            if (useVpws)
+                options.path = '/vpws/socket.io';
+
+            this.wsocket = io(hostname, options);
 
             this.wsocket.on('connect', () => {
                 console.log('ws connected');
             });
 
             this.wsocket.on('current', data => {
-                vm.poweredBy = 'ws';
+                this.vm.poweredBy = 'ws';
                 if (typeof (data) == 'string')
                     data = JSON.parse(data)
                 this.updateCurrent(data);
@@ -67,7 +66,7 @@ export class LiveWeatherComponent implements OnInit {
             });
 
             this.wsocket.on('hilows', data => {
-                vm.poweredBy = 'ws';
+                this.vm.poweredBy = 'ws';
                 var evnt;
                 var hilows = data;
                 if (typeof (data) == 'string')
@@ -77,11 +76,14 @@ export class LiveWeatherComponent implements OnInit {
 
             });
 
-            this.wsocket.on('alerts', function (data) {
+            this.wsocket.on('alerts', (data) => {
                 if (data && data.length) {
-                    var alerts = JSON.parse(data);
-                    vm.alerts = data[0].message;
+                    this.alerts = JSON.parse(data)[0];                    
                 }
+            });
+
+            this.wsocket.on('connect_error', (err)=> {
+                this.connectWS(false);
             });
 
         }
@@ -89,6 +91,14 @@ export class LiveWeatherComponent implements OnInit {
             console.log('socket error:' + e);
         }
 
+    }
+
+    checkService() {
+        this.webService.getCurrent().subscribe(current => {
+            this.connectWS(true);
+        }, err => {
+            this.connectWS(false);
+        });
     }
 
     updateCurrent(current) {

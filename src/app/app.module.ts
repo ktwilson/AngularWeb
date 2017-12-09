@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 import { DatePickerModule } from 'ng2-datepicker';
 import { JsonGridComponent } from './json-grid/json-grid.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AutomationComponent } from './automation/automation.component';
 
 
 const ROUTES = [
@@ -32,6 +33,10 @@ const ROUTES = [
     {
         path: 'weatherchart',
         component: WeatherChartComponent
+    },
+    {
+        path: 'automation',
+        component: AutomationComponent
     }
 ]; 
 
@@ -41,7 +46,8 @@ const ROUTES = [
     WeatherChartComponent,
     LiveWeatherComponent,
     JsonGridComponent,
-    DashboardComponent
+    DashboardComponent,
+    AutomationComponent
   ],
   imports: [
       BrowserModule,

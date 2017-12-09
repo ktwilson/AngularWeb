@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LiveWeatherComponent } from './live-weather.component';
+import { AutomationComponent } from './automation.component';
 
-//describe('LiveWeatherComponent', () => {
-//  let component: LiveWeatherComponent;
-//  let fixture: ComponentFixture<LiveWeatherComponent>;
+//describe('AutomationComponent', () => {
+//  let component: AutomationComponent;
+//  let fixture: ComponentFixture<AutomationComponent>;
 
 //  beforeEach(async(() => {
 //    TestBed.configureTestingModule({
-//      declarations: [ LiveWeatherComponent ]
+//      declarations: [ AutomationComponent ]
 //    })
 //    .compileComponents();
 //  }));
 
 //  beforeEach(() => {
-//    fixture = TestBed.createComponent(LiveWeatherComponent);
+//    fixture = TestBed.createComponent(AutomationComponent);
 //    component = fixture.componentInstance;
 //    fixture.detectChanges();
 //  });

@@ -9,7 +9,12 @@ export class WeatherService {
     ) { }
 
     getArchives(dtStart, period) {
-        return this.http.get('http://smart-app.live/vpws/archives?dt=' + dtStart + '&period=' + period)
+        return this.http.get('http://smart-app.live/vpdata/archives?dt=' + dtStart + '&period=' + period)
+            .map((res: Response) => res.json());
+    }
+
+    getCurrent() {
+        return this.http.get('http://smart-app.live:9000')
             .map((res: Response) => res.json());
     }
 

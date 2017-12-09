@@ -4,6 +4,9 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>NodejsWebApp1</Name>
     <RootNamespace>NodejsWebApp1</RootNamespace>
+    <NameOfLastUsedPublishProfile>file</NameOfLastUsedPublishProfile>
+    <ToolsVersionPromptShown>0.0</ToolsVersionPromptShown>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -28,13 +31,30 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
+    <TypeScriptTarget>ES2017</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="tsconfig.json" />
+    <None Include="file.pubxml" />
     <Content Include="src\app\app.component.css" />
     <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\automation\automation.component.css" />
+    <Content Include="src\app\automation\automation.component.html" />
     <Content Include="src\app\dashboard\dashboard.component.css" />
     <Content Include="src\app\dashboard\dashboard.component.html" />
     <Content Include="src\app\json-grid\json-grid.component.css" />
@@ -54,6 +74,8 @@
     <TypeScriptCompile Include="src\app\app.component.spec.ts" />
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\automation\automation.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\automation\automation.component.ts" />
     <TypeScriptCompile Include="src\app\classes\Archive.ts" />
     <TypeScriptCompile Include="src\app\classes\Current.ts" />
     <TypeScriptCompile Include="src\app\classes\GraphSet.ts" />
@@ -85,6 +107,7 @@
     <Folder Include="Scripts\typings\node\" />
     <Folder Include="src\" />
     <Folder Include="src\app\" />
+    <Folder Include="src\app\automation\" />
     <Folder Include="src\app\dashboard\" />
     <Folder Include="src\app\json-grid\" />
     <Folder Include="src\app\live-weather\" />

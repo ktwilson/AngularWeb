@@ -79,8 +79,8 @@ export class WeatherChartComponent implements OnInit {
 
         graphSet = new Graphs.GraphSet();
         graphSet.addItem('Rain Rate', 'rainRate');
-        graphSet.addItem('Rain Total', 'rainTotal');
-        graphSet.addItem('Rain Aggregate', 'rainAggr');
+        graphSet.addItem('Hourly Rain', 'rainTotal');
+        graphSet.addItem('Rain Total', 'rainAggr');
         graphSet.minimum = 0;
         graphSet.beginAtZero = true;
         this.dataSets.push(graphSet);
@@ -93,8 +93,8 @@ export class WeatherChartComponent implements OnInit {
         this.dataSets.push(graphSet);
 
         graphSet = new Graphs.GraphSet();
-        graphSet.addItem('Rain Total', 'rainTotal');
-        graphSet.addItem('Rain Aggregate', 'rainAggr');
+        graphSet.addItem('Daily Rain', 'rainTotal');
+        graphSet.addItem('Rain Total', 'rainAggr');
         graphSet.minimum = 0;
         graphSet.beginAtZero = true;
         this.dataSets.push(graphSet);

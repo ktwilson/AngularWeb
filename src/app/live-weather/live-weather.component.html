@@ -241,9 +241,9 @@
   </div>
 
   <br />
-  <div class="row" [hidden]="!vm.alerts || vm.alerts.length == 0">
+  <div class="row" [hidden]="!alerts || alerts.length == 0">
     <div class="col-md-8">
-      <span class="alert" [innerHtml]="vm.alerts"></span>
+      <span class="alert" [innerHtml]="alerts"></span>
     </div>
   </div>
 
