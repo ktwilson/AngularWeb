@@ -95,9 +95,9 @@ export class LiveWeatherComponent implements OnInit {
 
     checkService() {
         this.webService.getCurrent().subscribe(current => {
-            this.connectWS(true);
-        }, err => {
             this.connectWS(false);
+        }, err => {
+            this.connectWS(true);
         });
     }
 
@@ -134,12 +134,14 @@ export class LiveWeatherComponent implements OnInit {
 
 
         if (hilows.forecast) {
-            var fcast = hilows.forecast.periods;
+          var fcast = hilows.forecast.periods;
+          if (fcast[0].fcttext) {
             this.vm.forecast.today = fcast[0].fcttext;
             this.vm.forecast.icon = fcast[0].icon_url;
             this.vm.forecast.tonight = fcast[1].fcttext;
             this.vm.forecast.tomorrow = fcast[2].fcttext;
-        }
+          }
+        }       
 
         this.vm.today = {
             HiTemp: hilows.temperature.dailyHi, LowTemp: hilows.temperature.dailyLow,
