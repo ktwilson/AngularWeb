@@ -1,3 +1,3 @@
-C:\Projects\MyWeb\WebApp\obj\Debug\WebApp.njsprojResolveAssemblyReference.cache
 c:\Projects\MyWeb\WebApp\obj\Debug\WebApp.njsproj.CoreCompileInputs.cache
 c:\Projects\MyWeb\WebApp\bin\Microsoft.NodejsTools.WebRole.dll
+c:\Projects\MyWeb\WebApp\obj\Debug\WebApp.njsprojAssemblyReference.cache
