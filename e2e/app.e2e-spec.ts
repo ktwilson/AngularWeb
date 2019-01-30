@@ -1,10 +1,10 @@
-import { AngappPage } from './app.po';
+import { HomeAppPage } from './app.po';
 
-describe('angapp App', () => {
-  let page: AngappPage;
+describe('home-app App', () => {
+  let page: HomeAppPage;
 
   beforeEach(() => {
-    page = new AngappPage();
+    page = new HomeAppPage();
   });
 
   it('should display welcome message', () => {

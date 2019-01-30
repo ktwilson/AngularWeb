@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import io from 'socket.io-client';
 import { UtilityService } from '../services/utility';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
     vantagejs = { name: "VantageJS", class: "panel-default",icon:'', path:'vpws', url:'/#/weather' }
-    socketSrv = { name: "Sockets", class: "panel-default", icon: '', path: '/vpws/socket.io',url: 'http://smart-app.live/' }
+    socketSrv = { name: "Sockets", class: "panel-default", icon: '', path:'',url: 'http://smart-app.live/' }
     garDoor = { name: "Garage", class: "panel-default", icon:'', path:'gdoor/status'}
     shpDoor = { name: "Shop", class: "panel-default" ,icon:'', path:'shop/status'}
     fi9803p = { name: "FI9803P", class: "panel-default", icon: '', path:'gdoor/image' }
@@ -125,7 +125,10 @@ export class DashboardComponent implements OnInit {
               svc.display = data.temperature + '°F';
           }
 
-      },err=> svc.class = 'panel-danger');
+      }, err => {
+        svc.class = 'panel-danger'
+      }
+      );
   }   
 
   getCookie(name: string) {

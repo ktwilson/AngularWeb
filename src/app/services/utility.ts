@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers, ResponseContentType } from '@angular/http';
 
 @Injectable()

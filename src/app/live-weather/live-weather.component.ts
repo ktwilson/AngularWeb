@@ -40,16 +40,12 @@ export class LiveWeatherComponent implements OnInit {
 
     }
 
-    connectWS(useVpws) {        
+    connectWS() {        
 
         try {
-          var hostname = useVpws ? 'http://smart-app.live' : 'http://smart-app.live:9000';            
-
-            console.log('hostname ' + hostname);
-            var options: any = { query: { client: "wsclient" } };
-
-            if (useVpws)
-                options.path = '/vpws/socket.io';
+          var hostname = 'http://smart-app.duckdns.org';   
+            
+            var options: any = { query: { client: "wsclient" } };            
 
             this.wsocket = io(hostname, options);
 
@@ -83,7 +79,7 @@ export class LiveWeatherComponent implements OnInit {
             });
 
             this.wsocket.on('connect_error', (err)=> {
-                this.connectWS(false);
+                this.connectWS();
             });
 
         }
@@ -95,9 +91,9 @@ export class LiveWeatherComponent implements OnInit {
 
     checkService() {
         this.webService.getCurrent().subscribe(current => {
-            this.connectWS(false);
+            this.connectWS();
         }, err => {
-            this.connectWS(true);
+            this.connectWS();
         });
     }
 

@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Archive from '../classes/Archive';
 import { WeatherService } from '../services/weather';
 import * as Graphs from '../classes/GraphSet';
@@ -109,7 +109,7 @@ export class WeatherChartComponent implements OnInit {
         this.chartSet = this.dataSets[this.chartIndex];
         this.lineChartOptions = this['lineChartOptions' + this.chartIndex.toString()];
 
-        //this.loadGraph();
+        this.loadGraph();
     }
 
     chartClicked(e) {
@@ -234,8 +234,9 @@ export class WeatherChartComponent implements OnInit {
                 this.lineChartLabels.push(arch['_id'].archiveTime);
             });
 
-            this.chartSet.minimum = minTemp - 2;
             this.setChart();
+            this.chartSet.minimum = minTemp - 2;
+           
 
         });
     }
